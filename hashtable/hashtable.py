@@ -97,10 +97,23 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
+        
         if self.arr[index] is None:
+            self.count += 1
             self.arr[index] = HashTableEntry(key, value)
         else:
-            self.arr[index].value = value
+            current = self.arr[index]
+            prev = current
+            while current is not None:
+                if current.key == key:
+                    current.value = value
+                    return
+                
+                prev = current
+                current = current.next
+            
+            prev.next = HashTableEntry(key, value)
+            
 
 
     def delete(self, key):
@@ -112,10 +125,33 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
-        if self.arr[index] is not None:
-            self.arr[index].value = None
+
+        if self.arr[index] is None:
+            return None
+
         else:
-            print('Key not found')
+            current = self.arr[index]
+            prev = current
+
+            if self.arr[index].key == key:
+                value = current.value
+                self.arr[index] = current.next
+                self.count -= 1
+                return value
+            
+            else:
+                while current is not None:
+                    if current.key == key:
+                        prev.next = current.next
+                        self.count -= 1
+                        return current.value
+                    
+                    prev = current
+                    current = current.next
+        
+
+
+
 
 
     def get(self, key):
