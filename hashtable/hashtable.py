@@ -177,9 +177,18 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
-
+        if self.get_load_factor() >= 0.7:
+            old_arr = self.arr
+            ht = HashTable(new_capacity)
+            for i in old_arr:
+                current = i
+                while current:
+                    ht.put(current.key, current.value)
+                    current = current.next
+            self.capacity = new_capacity
+        
+        else:
+            return self.arr
 
 if __name__ == "__main__":
     ht = HashTable(8)
