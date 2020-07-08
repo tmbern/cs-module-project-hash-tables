@@ -1,5 +1,11 @@
 def no_dups(s):
-    # Your code here
+    empty_list = []
+
+    for i in s.split():
+        if i not in empty_list:
+            empty_list.append(i)
+    
+    return " ".join(empty_list)
 
 
 
