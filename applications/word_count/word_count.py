@@ -1,5 +1,17 @@
 def word_count(s):
-    # Your code here
+    ignored ='" : ; , . - + = / \ | [ ] { } ( ) * ^ &'
+    
+    s = s.lower()
+
+    for i in ignored:
+        s = s.replace(i, " ")
+
+    cache = {}
+    for i in s.split():
+        cache[i] = s.split().count(i)
+    
+    return cache
+
 
 
 
