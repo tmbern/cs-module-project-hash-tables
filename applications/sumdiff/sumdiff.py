@@ -7,7 +7,7 @@ f(a) + f(b) = f(c) - f(d)
 from itertools import product, combinations_with_replacement
 
 # q = set(range(1, 10))
-q = set(range(1, 100))
+q = set(range(1, 200))
 # q = (1, 3, 4, 7, 12)
 
 
