@@ -7,7 +7,7 @@ f(a) + f(b) = f(c) - f(d)
 from itertools import product, combinations_with_replacement
 
 # q = set(range(1, 10))
-q = set(range(1, 200))
+q = set(range(1, 100))
 # q = (1, 3, 4, 7, 12)
 
 
@@ -35,15 +35,23 @@ nums = product(q, repeat=4)
 #         if a + b == c - d:
 #             print(f'{a} + {b} = {c} - {d}')
 
+# create new cache to only store values where  a + b = c - d
+cache_v2 = {}
+
 # refactored above code to utilize a cache
 def sumdiff(combinations_of_nums):
     for i in combinations_of_nums:
         a, b, c, d = i[0], i[1], i[2], i[3]
 
         if cache[a] + cache[b] == cache[c] - cache[d]:
-            print(f'{cache[a]} + {cache[b]} = {cache[c]} - {cache[d]}')
+            cache_v2[i] = f'{cache[a]} + {cache[b]} = {cache[c]} - {cache[d]}'
+            # print(f'{cache[a]} + {cache[b]} = {cache[c]} - {cache[d]}')
+
+    return cache_v2
 
 print('done')
 
 if __name__ == "__main__":
-    sumdiff(nums)
+    results = sumdiff(nums)
+    for k, v in results.items():
+        print(k, v)
